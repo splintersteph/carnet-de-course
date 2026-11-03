@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Carnet de course — Stéphane Fortems</title>
+<meta name="description" content="Tableau de bord d'entraînement : reprise de la course à pied depuis fin août 2026.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap bar">
+    <div>
+      <h1>Carnet de course</h1>
+      <p class="sub">Reprise depuis le <span id="since"></span> · données Strava arrêtées au <span id="asof"></span></p>
+    </div>
+    <nav>
+      <a href="#bilan">Bilan</a><a href="#volume">Volume</a><a href="#cardio">Cardio</a><a href="#perf">Performances</a><a href="#seances">Séances</a><a href="#objectifs">Objectifs</a>
+      <button id="theme" aria-label="Changer de thème" title="Thème">◐</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="bilan">
+    <div class="kpis" id="kpis"></div>
+  </section>
+
+  <section id="volume">
+    <h2>Volume d'entraînement</h2>
+    <div class="grid2">
+      <figure class="card"><figcaption>Kilomètres et effort relatif par semaine</figcaption><div class="ch"><canvas id="cWeekly"></canvas></div></figure>
+      <figure class="card"><figcaption>Cumul de kilomètres courus</figcaption><div class="ch"><canvas id="cCum"></canvas></div></figure>
+    </div>
+  </section>
+
+  <section id="cardio">
+    <h2>Fréquence cardiaque &amp; endurance de base</h2>
+    <div class="grid2">
+      <figure class="card"><figcaption>Efficacité aérobie en endurance fondamentale <span class="hint">vitesse (m/min) ÷ FC moyenne — plus haut = mieux</span></figcaption><div class="ch"><canvas id="cEF"></canvas></div></figure>
+      <figure class="card"><figcaption>Allure et FC moyenne des sorties d'endurance <span class="hint">sorties sans bloc intense</span></figcaption><div class="ch"><canvas id="cEFpace"></canvas></div></figure>
+      <figure class="card"><figcaption>Temps par zone de FC et par semaine <span class="hint">estimé à partir de la FC moyenne de chaque kilomètre</span></figcaption><div class="ch"><canvas id="cZones"></canvas></div></figure>
+      <figure class="card"><figcaption>Allure vs FC moyenne <span class="hint">chaque point = un kilomètre</span></figcaption><div class="ch"><canvas id="cScatter"></canvas></div></figure>
+    </div>
+    <p class="note" id="zoneNote"></p>
+  </section>
+
+  <section id="perf">
+    <h2>Performances</h2>
+    <div class="grid2">
+      <figure class="card"><figcaption>Meilleur 1 km et meilleur 5 km par séance</figcaption><div class="ch"><canvas id="cBest"></canvas></div></figure>
+      <figure class="card"><figcaption>FC moyenne et FC max par séance</figcaption><div class="ch"><canvas id="cHR"></canvas></div></figure>
+    </div>
+    <div class="card" id="test5k"></div>
+  </section>
+
+  <section id="seances">
+    <h2>Explorateur de séances</h2>
+    <div class="card">
+      <div class="filters">
+        <label>Type <select id="fType"><option value="all">Toutes</option><option value="ef">Endurance</option><option value="q">Qualité / test</option></select></label>
+        <label>Distance min <select id="fDist"><option value="0">—</option><option value="6">6 km</option><option value="8">8 km</option><option value="10">10 km</option></select></label>
+        <span class="count" id="fCount"></span>
+      </div>
+      <div class="tablewrap"><table id="tbl"><thead><tr>
+        <th data-k="date">Date</th><th data-k="name">Séance</th><th data-k="km" class="r">Km</th><th data-k="sec" class="r">Durée</th><th data-k="pace" class="r">Allure</th><th data-k="hr" class="r">FC moy</th><th data-k="hmax" class="r">FC max</th><th data-k="elev" class="r">D+</th><th data-k="eff" class="r">Effi.</th>
+      </tr></thead><tbody></tbody></table></div>
+    </div>
+    <div class="card" id="detail">
+      <div class="dhead"><h3 id="dTitle">Détail de la séance</h3><div id="dMeta" class="meta"></div></div>
+      <div class="ch tall"><canvas id="cLaps"></canvas></div>
+      <div class="tablewrap"><table id="lapTbl"></table></div>
+    </div>
+  </section>
+
+  <section id="objectifs">
+    <h2>Objectifs &amp; projections</h2>
+    <div class="grid2">
+      <div class="card"><h3>Équivalences à partir du 5 km test (24:06)</h3><p class="hint2">Modèle de Riegel, exposant 1,06 — estimation, pas une mesure.</p><table id="riegel"></table></div>
+      <div class="card"><h3>Série de tests progressifs</h3><p class="hint2">Un test toutes les deux semaines, semaines intercalées en seuil.</p><table id="plan"></table></div>
+    </div>
+  </section>
+
+  <section id="autres">
+    <h2>Autres activités</h2>
+    <div class="card"><div class="tablewrap"><table id="other"></table></div></div>
+  </section>
+</main>
+
+<footer class="wrap foot">
+  <p>Instantané des données Strava au <span id="asof2"></span>. Aucune clé ni identifiant n'est stocké dans ce site. Zones de FC calculées sur une FC max observée de 189 bpm.</p>
+</footer>
+
+<script src="libs/chart.umd.min.js"></script>
+<script src="data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
