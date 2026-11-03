@@ -248,6 +248,21 @@
       plan.map(p => '<tr><td>' + p[0] + '</td><td>' + p[1] + '</td><td class="r">' + p[2] + '</td><td class="r">' + p[3] + '</td></tr>').join('') + '</tbody>';
   })();
 
+  // ---------- next sessions ----------
+  const NEXT = [
+    ['2026-11-05', 'Endurance facile', '6–7 km, allure libre autour de 7:00/km', 'FC 146–150', ''],
+    ['2026-11-06', 'Repos', 'Veille de test : marche ou rien', '–', 'rest'],
+    ['2026-11-07', 'TEST 6 km en 30:00', '2 km échauffement + 6 km à 5:00/km + 1 km retour au calme', 'FC attendue ≈ 178–182', 'q'],
+    ['2026-11-10', 'Endurance', '7 km tranquilles', 'FC 146–150', ''],
+    ['2026-11-12', 'Seuil', '2 km échauffement + 3 × 8 min à ~5:20–5:25/km (récup 2 min trot) + 1 km retour au calme', 'FC 172–178', 'q'],
+    ['2026-11-14', 'Sortie longue', '10 km en endurance, finir sans forcer', 'FC 146–152', ''],
+    ['2026-11-17', 'Endurance', '8 km', 'FC 146–150', ''],
+    ['2026-11-19', 'Endurance facile', '6 km très tranquilles (veille de repos)', 'FC ≤ 148', ''],
+    ['2026-11-21', 'TEST 7 km en 35:00', '2 km échauffement + 7 km à 5:00/km + 1 km retour au calme', 'FC attendue ≈ 178–183', 'q']
+  ];
+  $('#next').innerHTML = '<thead><tr><th>Date</th><th>Séance</th><th>Contenu</th><th>Intensité</th></tr></thead><tbody>' +
+    NEXT.map(n => '<tr><td>' + fmtDateL(n[0]) + '</td><td><b>' + n[1] + '</b></td><td style="white-space:normal;min-width:260px">' + n[2] + '</td><td>' + n[3] + '</td></tr>').join('') + '</tbody>';
+
   // ---------- other activities ----------
   $('#other').innerHTML = '<thead><tr><th>Date</th><th>Type</th><th>Activité</th><th class="r">Km</th><th class="r">Durée</th><th class="r">D+</th><th class="r">Effort</th></tr></thead><tbody>' +
     D.other.slice().reverse().map(o => '<tr><td>' + fmtDate(o.date) + '</td><td>' + ({ Ride: 'Vélo', Hike: 'Rando' }[o.type] || o.type) + '</td><td>' + esc(o.name) + '</td><td class="r">' + nf(o.km, 1) + '</td><td class="r">' + fmtDur(o.sec) + '</td><td class="r">' + Math.round(o.elev) + '</td><td class="r">' + (o.effort || '–') + '</td></tr>').join('') + '</tbody>';

@@ -15,7 +15,7 @@
       <p class="sub">Reprise depuis le <span id="since"></span> · données Strava arrêtées au <span id="asof"></span></p>
     </div>
     <nav>
-      <a href="#bilan">Bilan</a><a href="#volume">Volume</a><a href="#cardio">Cardio</a><a href="#perf">Performances</a><a href="#seances">Séances</a><a href="#objectifs">Objectifs</a>
+      <a href="#bilan">Bilan</a><a href="#volume">Volume</a><a href="#cardio">Cardio</a><a href="#perf">Performances</a><a href="#seances">Séances</a><a href="#prochaines">Prochaines séances</a><a href="#objectifs">Objectifs</a>
       <button id="theme" aria-label="Changer de thème" title="Thème">◐</button>
     </nav>
   </div>
@@ -71,6 +71,12 @@
       <div class="ch tall"><canvas id="cLaps"></canvas></div>
       <div class="tablewrap"><table id="lapTbl"></table></div>
     </div>
+  </section>
+
+  <section id="prochaines">
+    <h2>Prochaines séances conseillées</h2>
+    <div class="card"><div class="tablewrap"><table id="next"></table></div>
+    <p class="note">Règles : une seule séance dure par semaine (le test en tient lieu), sortie longue ≤ 30–35 % du volume hebdo, repos la veille d'un test. En seuil, on pilote à la FC (172–178 bpm) plutôt qu'à l'allure si on est fatigué.</p></div>
   </section>
 
   <section id="objectifs">
